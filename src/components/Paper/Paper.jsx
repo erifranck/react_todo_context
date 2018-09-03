@@ -9,11 +9,12 @@ const Wrapper = styled.div`
 `
 
 export const Paper = (props) => (
-  <Wrapper>
+  <Wrapper className={props.className}>
     {props.children}
   </Wrapper>
 )
 
 Paper.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string
 }
