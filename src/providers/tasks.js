@@ -23,7 +23,9 @@ export class TaskProvider extends Component {
   findBoard = (index) => this.state.tasks.filter((item) => ( item.index === index ))
 
   changeBoard = (id, index) => this.setState(prevState =>({
-    tasks: prevState.tasks.map((item) =>  item.id === id  ? {...item, index} : item),
+    tasks: prevState.tasks.map((item) => (
+      ( item.id === id  && Math.max(item.index, index) - Math.min(item.index, index) <= 1)  ? {...item, index} : item)
+    ),
     dragId: null
   }) )
 
