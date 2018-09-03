@@ -9,12 +9,16 @@ const Wrapper = styled.div`
 `
 
 export const Paper = (props) => (
-  <Wrapper className={props.className}>
+  <Wrapper className={props.className} draggable={props.draggable} onDragOver={props.onDragOver} onDrag={props.dragStart} onDrop={props.onDrop}>
     {props.children}
   </Wrapper>
 )
 
 Paper.propTypes = {
   children: PropTypes.node,
+  draggable: PropTypes.bool,
+  onDrop: PropTypes.func,
+  onDragOver: PropTypes.func,
+  dragStart: PropTypes.func,
   className: PropTypes.string
 }

@@ -6,7 +6,7 @@ import {
 } from 'components/Paper/Paper'
 
 const Box = (props) => (
-  <Paper deph={props.deph} className={props.className} >
+  <Paper deph={props.deph} draggable className={props.className} dragStart={() => props.dragStart(props.id)} >
     <div className="box-content">
       {props.children}
     </div>
@@ -37,5 +37,6 @@ Box.propTypes = {
   children: PropTypes.node,
   id: PropTypes.string,
   remove: PropTypes.func,
+  dragStart: PropTypes.func,
   className: PropTypes.string
 }

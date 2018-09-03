@@ -16,25 +16,32 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      board: ["Todo", "In Progress", "Done"]
     }
   }
   render() {
     return (
         <DIV>
-            {
-              this.state.board.map(( item, index ) => (
-                <TaskProvider key={index}>
-                  <TaskConsumer>
-                    {
-                      ({tasks, set, update, remove}) => (
-                        <TaskBoard tasks={tasks} title={item} className='board' addTask={set} updateTask={update} remove={remove} />
-                      )
-                    }
-                  </TaskConsumer>
-                </TaskProvider>
-              ))
-            }
+          <TaskProvider>
+            <TaskConsumer>
+              {
+                ({boards, tasks, set, update, remove, findBoard, changeBoard, dragStart, dragId}) => (
+                  boards.map((item, index) => (
+                    <TaskBoard
+                      key={index}
+                      tasks={findBoard(index)}
+                      title={item}
+                      className='board'
+                      addTask={set}
+                      moveTask={() => changeBoard(dragId, index)}
+                      dragStart={dragStart}
+                      index={index}
+                      updateTask={update}
+                      remove={remove} />
+                  ))
+                )
+              }
+            </TaskConsumer>
+          </TaskProvider>
         </DIV>
     );
   }

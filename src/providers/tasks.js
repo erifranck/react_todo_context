@@ -2,24 +2,49 @@ import React, { createContext, Component } from 'react';
 import uid from 'uid'
 
 const { Consumer, Provider } = createContext({
+  dragId: null,
   tasks: [],
+  boards: [],
   set() {},
   remove() {},
+  findBoard() {},
+  changeBoard() {},
+  dragStart() {},
   update() {}
 });
 
 export class TaskProvider extends Component {
   state = {
-    tasks: []
+    tasks: [],
+    dragId: null,
+    boards: ["Todo", "In Progress", "Done"]
   };
 
-  set = (value) => {
-    this.setState((prevState) => ({ tasks: prevState.tasks.concat([ {name: value || `task${ this.state.tasks.length + 1 }`, id: uid()} ]) }))
+  findBoard = (index) => this.state.tasks.filter((item) => ( item.index === index ))
+
+  changeBoard = (id, index) => this.setState(prevState =>({
+    tasks: prevState.tasks.map((item) =>  item.id === id  ? {...item, index} : item),
+    dragId: null
+  }) )
+
+  set = (value, index) => {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.concat([ {
+        name: value || `task${ this.state.tasks.length + 1 }`,
+        id: uid(),
+        index,
+        move: false,
+        position: 0
+      } ]) }))
   }
-  update = (id, value) => {
+
+  dragStart = (id) => this.setState({dragId: id})
+
+  update = ({ id, value, index }) => {
     this.setState((prevState) =>
       ({ tasks: prevState.tasks.map( item => ( item.id === 'id' ? {name: value, id } : item))}))
   }
+
   remove = (id) => {
     this.setState((prevState) => ({ tasks: prevState.tasks.filter(item => item.id !== id) }))
   }
@@ -29,7 +54,10 @@ export class TaskProvider extends Component {
           ...this.state,
           remove: this.remove,
           update: this.update,
-          set: this.set
+          set: this.set,
+          changeBoard: this.changeBoard,
+          dragStart: this.dragStart,
+          findBoard: this.findBoard
       }}>
         {this.props.children}
       </Provider>

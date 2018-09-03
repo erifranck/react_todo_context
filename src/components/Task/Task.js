@@ -16,6 +16,7 @@ export const TaskBoard = styled(Board)`
   }
   .board-body {
     padding: 0px 10px;
+    min-height: 200px;
     .task {
       margin-bottom: 20px;
       .task-shadow {
