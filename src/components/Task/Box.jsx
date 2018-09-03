@@ -12,7 +12,7 @@ const Box = (props) => (
     </div>
     <div className='box-button-container'>
       <button>edit</button>
-      <button>delete</button>
+      <button onClick={() => props.remove(props.id) }>delete</button>
     </div>
   </Paper>
 )
@@ -35,5 +35,7 @@ export const TaskBox = styled(Box)`
 
 Box.propTypes = {
   children: PropTypes.node,
+  id: PropTypes.string,
+  remove: PropTypes.func,
   className: PropTypes.string
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Paper} from 'components/Paper/Paper'
 import {TaskBox} from 'components/Task/Box'
 
-export const Board = ({tasks = [], className, title, addTask}) => (
+export const Board = ({tasks = [], className, title, addTask, remove}) => (
   <Paper deph={1} className={className} >
     <div class="board-header">
       <h4>
@@ -17,7 +17,7 @@ export const Board = ({tasks = [], className, title, addTask}) => (
     {
       tasks.map((item, index) => (
         <div className="task-shadow" >
-          <TaskBox key={index} className='task'>
+          <TaskBox key={index} className='task' id={item.id} remove={remove}>
             { item.name }
           </TaskBox>
         </div>

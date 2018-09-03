@@ -27,8 +27,8 @@ class App extends Component {
                 <TaskProvider key={index}>
                   <TaskConsumer>
                     {
-                      ({tasks, set, update}) => (
-                        <TaskBoard tasks={tasks} title={item} className='board' addTask={set} updateTask={update} />
+                      ({tasks, set, update, remove}) => (
+                        <TaskBoard tasks={tasks} title={item} className='board' addTask={set} updateTask={update} remove={remove} />
                       )
                     }
                   </TaskConsumer>
