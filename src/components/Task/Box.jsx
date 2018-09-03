@@ -17,8 +17,7 @@ const Box = (props) => (
   </Paper>
 )
 
-export const TaskBox = styled(Box)
-`
+export const TaskBox = styled(Box)`
   min-height: 100px;
   width: 100%;
   background-color: #FEFEFE;

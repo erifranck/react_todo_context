@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import {TaskBoard} from 'components'
+import {TaskProvider, TaskConsumer} from 'providers'
 
 const DIV = styled.div`
   min-height: 800px;
@@ -12,13 +13,29 @@ const DIV = styled.div`
   }
 `
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      board: ["Todo", "In Progress", "Done"]
+    }
+  }
   render() {
     return (
-      <DIV>
-        <TaskBoard tasks={["task1", "task2", "task3"]} title='Todo' className='board' />
-        <TaskBoard tasks={[]} title='In Progress' className='board' />
-        <TaskBoard tasks={[]} title='Done' className='board' />
-      </DIV>
+        <DIV>
+            {
+              this.state.board.map(( item, index ) => (
+                <TaskProvider key={index}>
+                  <TaskConsumer>
+                    {
+                      ({tasks, set, update}) => (
+                        <TaskBoard tasks={tasks} title={item} className='board' addTask={set} updateTask={update} />
+                      )
+                    }
+                  </TaskConsumer>
+                </TaskProvider>
+              ))
+            }
+        </DIV>
     );
   }
 }
