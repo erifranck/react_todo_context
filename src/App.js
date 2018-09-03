@@ -29,7 +29,8 @@ class App extends Component {
                     <TaskBoard
                       key={index}
                       tasks={findBoard(index)}
-                      title={item}
+                      title={item.title}
+                      canAdd={item.canAdd}
                       className='board'
                       addTask={set}
                       moveTask={() => changeBoard(dragId, index)}

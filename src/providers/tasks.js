@@ -17,7 +17,11 @@ export class TaskProvider extends Component {
   state = {
     tasks: [],
     dragId: null,
-    boards: ["Todo", "In Progress", "Done"]
+    boards: [
+      { title: "Todo", canAdd: true },
+      { title: "In Progress", canAdd: false },
+      { title: "Done", canAdd: false }
+    ]
   };
 
   findBoard = (index) => this.state.tasks.filter((item) => ( item.index === index ))
