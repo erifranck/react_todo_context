@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   background-color: white;
   border: 1px solid #eee;
-  box-shadow: -19px 17px 82px -31px rgba(0,0,0,0.75);
+  box-shadow: -19px 17px 82px -31px rgba(0,0,0,0.1);
 `
 
 export const Paper = (props) => (
